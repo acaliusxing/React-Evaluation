@@ -39,7 +39,8 @@ const getHobbies = () => {
 const getAgeByName = (name) => {
   let age = 0;
   _.map(db.usersById, (userInfo) => {
-    if (userInfo.username === name) {
+    // console.log(userInfo)
+    if (userInfo.username == name) {
       age = userInfo.age;
     }
   });
@@ -57,14 +58,15 @@ const getNameListByHobby = (hobby) => {
 };
 const mapAgesByName = (names) => {
   let hashMap = new Map();
-  for (let name in names) {
+  names.forEach(name => {
     let age = getAgeByName(name);
     if (hashMap.has(age)) {
       hashMap.set(age, hashMap.get(age) + 1);
     } else {
       hashMap.set(age, 1);
     }
-  }
+  })
+  console.log(hashMap)
   return hashMap;
 };
 

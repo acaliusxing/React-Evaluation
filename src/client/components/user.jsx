@@ -18,7 +18,7 @@ export default class User extends Component {
                     <tbody>
                         {users.map(user => {
                             return (
-                                <tr >
+                                <tr key={nanoid()}>
                                     <td>{user.username}</td>
                                     <td>{user.age}</td>
                                 </tr>
