@@ -2,7 +2,7 @@
 const mockDBCalls = require('../database/index.js');
 
 const getListOfAgesOfUsersWithHandler = async (request, response) => {
-  const hobbyToLookup = request.body;
+  const hobbyToLookup = 'movie';
   const data = await mockDBCalls.getListOfAgesOfUsersWith(hobbyToLookup);
   return response.status(200).send(JSON.stringify(data));
 };

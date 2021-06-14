@@ -36,13 +36,53 @@ const getHobbies = () => {
   return mockDBCall(dataAccessMethod);
 };
 
+const getAgeByName = (name) => {
+  let age = 0;
+  _.map(db.usersById, (userInfo) => {
+    if (userInfo.username === name) {
+      age = userInfo.age;
+    }
+  });
+  return age;
+};
+
+const getNameListByHobby = (hobby) => {
+  let list = [];
+  _.map(db.hobbiesOfUserByUsername, (userInfo, user) => {
+    if (userInfo.includes(hobby)) {
+      list.push(user);
+    }
+  });
+  return list;
+};
+const mapAgesByName = (names) => {
+  let hashMap = new Map();
+  for (let name in names) {
+    let age = getAgeByName(name);
+    if (hashMap.has(age)) {
+      hashMap.set(age, hashMap.get(age) + 1);
+    } else {
+      hashMap.set(age, 1);
+    }
+  }
+  return hashMap;
+};
+
 const getListOfAgesOfUsersWith = (hobby) => {
   const dataAccessMethod = () => {
     // fill me in :) should return an arry of age count based on hobby.
-    return [
-      { age: 18, count: 2 },
-      { age: 12, count: 1 },
-    ];
+    // return [
+    //   { age: 18, count: 2 },
+    //   { age: 12, count: 1 },
+    // ];
+    const nameList = getNameListByHobby(hobby);
+    let map = mapAgesByName(nameList);
+    let result = [];
+    for (let [key, value] of map) {
+      result.push({ age: key, count: value });
+    }
+
+    return result;
   };
   return mockDBCall(dataAccessMethod);
 };
