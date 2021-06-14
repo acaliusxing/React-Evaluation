@@ -11,12 +11,13 @@ export default class hobby extends Component {
 
     handleSelect = (event) => {
         const hobby = event.target.value;
-        getListOfAge(hobby).then(data => console.log(data))
-        // getListOfAge(hobby).then(data => this.setState({hobbyCount:data}))
+        // getListOfAge(hobby).then(data => console.log(data))
+        getListOfAge(hobby).then(data => this.setState({hobbyCount:data}))
     }
 
     render() {
-        const {hobbies} = this.props
+        const {hobbies} = this.props;
+        const {hobbyCount} = this.state
         return (
             <div>
                 <h1>Age Demographic of Users with Hobby</h1>
@@ -27,7 +28,7 @@ export default class hobby extends Component {
                     ))
                     }
                 </select>
-                <HobbyTable />
+                <HobbyTable hobbyCount={hobbyCount}/>
             </div>
         )
     }

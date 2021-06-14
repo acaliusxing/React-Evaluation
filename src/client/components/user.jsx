@@ -11,8 +11,8 @@ export default class User extends Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th scope="col">Username</th>
-                            <th scope="col">Userage</th>
+                            <th scope="col">User Name</th>
+                            <th scope="col">User Age</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -18,7 +18,7 @@ export default class App extends Component {
   render() {
     const {users, hobbies} = this.state
     return (
-      <div className="container">
+      <div className="mycontainer">
         <User users={users}/>
         <br/>
         <Hobby hobbies={hobbies}/>
