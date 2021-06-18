@@ -9,7 +9,8 @@ export default class Hobby extends Component {
     state = {
         hobbies: [],
         hobbyDemographic: [],
-        selectHobby: null
+        isLoading: false,
+        selectHobby: ""
     }
 
     componentDidMount () {
@@ -18,12 +19,12 @@ export default class Hobby extends Component {
 
     handleSelect = (event) => {
         const hobby = event.target.value;
-        this.setState({selectHobby: hobby});
-        getListOfAge(hobby).then(data => this.setState({hobbyDemographic:data}))
+        this.setState({selectHobby: hobby, isLoading:true});
+        getListOfAge(hobby).then(data => this.setState({hobbyDemographic:data, isLoading:false}))
     }
 
     render() {
-        const {hobbies, hobbyDemographic, selectHobby} = this.state;
+        const {hobbies, hobbyDemographic, isLoading, selectHobby} = this.state;
         return (
             <div className="mycontainer">
                 <h2 style={{textAlign: 'center'}}>Age Demographic of Users with Hobby</h2>
@@ -34,7 +35,7 @@ export default class Hobby extends Component {
                     ))
                     }
                 </select>
-                <HobbyTable hobbyDemographic={hobbyDemographic}/>
+                <HobbyTable hobbyDemographic={hobbyDemographic} isLoading={isLoading} />
             </div>
         )
     }

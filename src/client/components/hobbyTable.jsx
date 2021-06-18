@@ -4,10 +4,11 @@ import {nanoid} from "nanoid"
 export default class HobbyTable extends Component {
     
     render() {
-        const {hobbyDemographic} = this.props
+        const {hobbyDemographic, isLoading} = this.props
         return (
             <>
-                {hobbyDemographic.length > 0 ? (
+                {isLoading ? (<h3>is loading...</h3>) :
+                hobbyDemographic.length > 0 ? (
                 <table className="table">
                     <thead>
                         <tr>

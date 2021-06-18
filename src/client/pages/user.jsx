@@ -7,20 +7,22 @@ export default class User extends Component {
 
     state = {
         users: [],
+        isLoading: true
     }
 
     componentDidMount () {
-        getUsers().then(data => this.setState({users:data}))
+        getUsers().then(data => this.setState({users:data, isLoading:false}))
     }
 
     render() {
-        const {users} = this.state
+        const {users, isLoading} = this.state
+
         return (
-            <div className="mycontainer">
+            <div className="mycontainer"> 
                 <h2 style={{textAlign: 'center'}}>All Users</h2>
                 <h5 style={{textAlign: 'center'}}>username and userage</h5>
-
-                <table className="table">
+                {isLoading? (<h3>is loading....</h3> ) : (
+                    <table className="table" >
                     <thead>
                         <tr>
                             <th scope="col">User Name</th>
@@ -36,9 +38,11 @@ export default class User extends Component {
                                 </tr>
                             )
                         })}
- 
+    
                     </tbody>
                 </table>
+                )}
+
             </div>
         )
     }
