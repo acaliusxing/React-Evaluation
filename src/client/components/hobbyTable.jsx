@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {nanoid} from "nanoid"
 
-export default class hobbyTable extends Component {
+export default class HobbyTable extends Component {
     
     render() {
-        const {hobbyCount} = this.props
+        const {hobbyDemographic} = this.props
         return (
-            <div>
+            <>
+                {hobbyDemographic.length > 0 ? (
                 <table className="table">
                     <thead>
                         <tr>
@@ -15,7 +16,7 @@ export default class hobbyTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {hobbyCount.map(hobby => {
+                        {hobbyDemographic.map(hobby => {
                             return (
                                 <tr key={nanoid()}>
                                     <td>{hobby.age}</td>
@@ -24,8 +25,8 @@ export default class hobbyTable extends Component {
                             )
                         })}
                     </tbody>
-                </table>
-            </div>
+                </table> ) : null }
+            </>
         )
     }
 }

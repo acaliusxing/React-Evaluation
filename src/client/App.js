@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
-import { getUsers, getHobbies } from './userAPIs';
-import User from './components/user.jsx';
-import Hobby from './components/hobby.jsx'
+import {Switch, Route, Redirect} from 'react-router-dom';
+
+import User from './pages/user.jsx';
+import Hobby from './pages/hobby.jsx';
+import Home from './pages/home.jsx';
+import UserDetails from './pages/userDetails.jsx'
+import Header from './components/header.jsx'
 
 
 export default class App extends Component {
-  state = {
-    users: [],
-    hobbies: []
-  }
 
-  componentDidMount () {
-    getUsers().then(data => this.setState({users:data}))
-    getHobbies().then(data => this.setState({hobbies:data}))
-  }
 
   render() {
-    const {users, hobbies} = this.state
     return (
-      <div className="mycontainer">
-        <User users={users}/>
-        <br/>
-        <Hobby hobbies={hobbies}/>
+      <div className="container">
+        <Header />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/users' component={User} />
+          <Route path='/demographic' component={Hobby} />
+          <Route path='/userdetails/:username' component={UserDetails} />
+          <Redirect to='/' />
+        </Switch>
       </div>
     );
   }

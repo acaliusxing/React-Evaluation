@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
-import {nanoid} from 'nanoid'
+import {Link} from 'react-router-dom';
+import {nanoid} from 'nanoid';
+import { getUsers } from '../APIs/userAPIs';
 
 export default class User extends Component {
+
+    state = {
+        users: [],
+    }
+
+    componentDidMount () {
+        getUsers().then(data => this.setState({users:data}))
+    }
+
     render() {
-        const {users} = this.props
+        const {users} = this.state
         return (
-            <div>
-                <h1>All Users</h1>
-                <h4>username and userage</h4>
+            <div className="mycontainer">
+                <h2 style={{textAlign: 'center'}}>All Users</h2>
+                <h5 style={{textAlign: 'center'}}>username and userage</h5>
+
                 <table className="table">
                     <thead>
                         <tr>
@@ -19,7 +31,7 @@ export default class User extends Component {
                         {users.map(user => {
                             return (
                                 <tr key={nanoid()}>
-                                    <td>{user.username}</td>
+                                    <td><Link to={`/userdetails/${user.username}`} style={{textDecoration: 'none', color: "black"}}>{user.username}</Link></td>
                                     <td>{user.age}</td>
                                 </tr>
                             )

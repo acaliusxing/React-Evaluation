@@ -29,6 +29,11 @@ module.exports = {
         test: /\.s[ac]ss$/,
         use: ['style-loader','css-loader', 'sass-loader']
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
+        exclude: /node_modules/,
+        use: ['file-loader?name=[name].[ext]']
+      }
     ]
   },
   plugins: [

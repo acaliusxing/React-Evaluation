@@ -19,6 +19,7 @@ const getUsers = () => {
   const dataAccessMethod = () => _.map(db.usersById, (userInfo) => userInfo);
   return mockDBCall(dataAccessMethod);
 };
+
 const getHobbies = () => {
   const dataAccessMethod = () => {
     let hobbies = []
@@ -40,7 +41,7 @@ const getAgeByName = (name) => {
   let age = 0;
   _.map(db.usersById, (userInfo) => {
     // console.log(userInfo)
-    if (userInfo.username == name) {
+    if (userInfo.username === name) {
       age = userInfo.age;
     }
   });
@@ -56,6 +57,7 @@ const getNameListByHobby = (hobby) => {
   });
   return list;
 };
+
 const mapAgesByName = (names) => {
   let hashMap = new Map();
   names.forEach(name => {
@@ -66,7 +68,6 @@ const mapAgesByName = (names) => {
       hashMap.set(age, 1);
     }
   })
-  console.log(hashMap)
   return hashMap;
 };
 
@@ -83,14 +84,27 @@ const getListOfAgesOfUsersWith = (hobby) => {
     for (let [key, value] of map) {
       result.push({ age: key, count: value });
     }
-
     return result;
   };
   return mockDBCall(dataAccessMethod);
 };
 
+const getHobbiesByUsername = (username) => {
+  const dataAccessMethod = () => {
+    let hobbies
+    _.map(db.hobbiesOfUserByUsername, (userHobbies, user) => {
+      if (user === username) {
+        hobbies = userHobbies;
+      }
+    });
+    return hobbies
+  }
+  return mockDBCall(dataAccessMethod)
+}
+
 module.exports = {
   getUsers,
   getListOfAgesOfUsersWith,
   getHobbies,
+  getHobbiesByUsername
 };

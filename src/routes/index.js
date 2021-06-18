@@ -5,4 +5,5 @@ module.exports = (app) => {
   require('./getUsers.js')(app);
   require('./getHobbies.js')(app);
   require('./getListOfAgesOfUsersWith.js')(app);
+  require('./getHobbiesByUser.js')(app);
 };
